@@ -39,35 +39,24 @@ if ($has_access) {
 
 <?php if ($has_access && empty($error_message)): ?>
     <?php if (!empty($quotes)): ?>
-        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 20px;">
-            <?php foreach ($quotes as $quote): ?>
-                <div style="border: 1px solid #e2e8f0; border-left: 5px solid #3b82f6; border-radius: 8px; padding: 16px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    
-                    <blockquote style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1e293b; font-style: italic; line-height: 1.5;">
-                        "<?= html_escape($quote['quote']) ?>"
-                    </blockquote>
-                    
-                    <p style="margin: 0 0 12px 0; color: #64748b; font-size: 0.95rem;">
-                        — <strong><?= html_escape($quote['source']) ?></strong>
-                        <?php if (!empty($quote['favorite'])): ?>
-                            <span style="background-color: #fef3c7; color: #d97706; padding: 2px 8px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; margin-left: 8px;">
-                                ⭐ Yêu thích
-                            </span>
-                        <?php endif; ?>
-                    </p>
-                    
-                    <div style="border-top: 1px solid #f1f5f9; padding-top: 8px; font-size: 0.9rem; color: #475569;">
-                        <strong>Quản trị Trích dẫn:</strong> 
-                        <a href="edit_quote.php?id=<?= urlencode($quote['id']) ?>" style="color: #2563eb; text-decoration: none; margin-left: 5px; font-weight: 500;">✏️ Sửa</a>
-                        <span style="color: #cbd5e1; margin: 0 6px;">|</span>
-                        <a href="delete_quote.php?id=<?= urlencode($quote['id']) ?>" style="color: #dc2626; text-decoration: none; font-weight: 500;">🗑️ Xóa</a>
-                    </div>
-                    
-                </div>
-            <?php endforeach; ?>
-        </div>
+        <?php foreach ($quotes as $quote): ?>
+            <div>
+                <blockquote><?= html_escape($quote['quote']) ?></blockquote>
+                <p>— <?= html_escape($quote['source']) ?>
+                    <?php if (!empty($quote['favorite'])): ?>
+                        <strong> | Yêu thích!</strong>
+                    <?php endif; ?>
+                </p>
+                <p>
+                    <strong>Quản trị Trích dẫn:</strong>
+                    <a href="edit_quote.php?id=<?= urlencode($quote['id']) ?>">Sửa</a> |
+                    <a href="delete_quote.php?id=<?= urlencode($quote['id']) ?>">Xóa</a>
+                </p>
+            </div>
+            <br>
+        <?php endforeach; ?>
     <?php else: ?>
-        <p style="color: #64748b; font-style: italic;">Chưa có trích dẫn nào trong hệ thống.</p>
+        <p>Chưa có trích dẫn nào.</p>
     <?php endif; ?>
 <?php endif; ?>
 
